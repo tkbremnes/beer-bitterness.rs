@@ -1,6 +1,6 @@
 use std::io;
 
-// hop_weight        grams
+// hop_weight       grams
 // time             minutes
 // alpha_acids      fraction
 // batch_size       liters
@@ -16,21 +16,31 @@ fn main() {
     println!("Input hop weight (grams)");
     io::stdin().read_line(&mut hop_weight)
         .expect("Failed");
+    let hop_weight: u32 = hop_weight.trim().parse()
+        .expect("Failed");
 
     println!("Input time (minutes)");
     io::stdin().read_line(&mut time)
+        .expect("Failed");
+    let time: u32 = time.trim().parse()
         .expect("Failed");
 
     println!("Alpha acids (fraction)");
     io::stdin().read_line(&mut alpha_acids)
         .expect("Failed");
+    let alpha_acids: f32 = alpha_acids.trim().parse()
+        .expect("Failed");
 
     println!("Batch size (liters)");
     io::stdin().read_line(&mut batch_size)
         .expect("Failed");
+    let batch_size: u32 = batch_size.trim().parse()
+        .expect("Failed");
 
     println!("Special gravity");
     io::stdin().read_line(&mut special_gravity)
+        .expect("Failed");
+    let special_gravity: f32 = special_gravity.trim().parse()
         .expect("Failed");
 
     println!("hop_weight: {}", hop_weight);
