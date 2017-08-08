@@ -1,0 +1,6 @@
+[package]
+name = "beer-bitterness"
+version = "0.1.0"
+authors = ["Trond Kjetil Bremnes <tkbremnes@gmail.com>"]
+
+[dependencies]
