@@ -1,5 +1,10 @@
 pub struct Tinseth;
 
+const BIGNESS_GRAVITY_BASE:       f64 = 0.000125;
+const BIGNESS_GRAVITY_MULTIPLIER: f64 = 1.65;
+const CURVE_SHAPE:                f64 = -0.04;
+const MAX_UTILIZATION:            f64 = 4.15;
+
 // tinseth source: http://realbeer.com/hops/research.html
 fn alpha_acid_concentration(
     alpha_acids: f32,
@@ -16,7 +21,7 @@ fn bigness_factor(
 ) -> f64 {
     // The Bigness factor accounts for reduced utilization due to higher wort gravities. Use an
     // average gravity value for the entire boil to account for changes in the wort volume.
-    1.65 * ((0.000125 as f64).powf(wort_gravity as f64 - 1.0))
+    BIGNESS_GRAVITY_MULTIPLIER * (BIGNESS_GRAVITY_BASE.powf(wort_gravity as f64 - 1.0))
 }
 
 fn boil_time_factor(
@@ -24,10 +29,8 @@ fn boil_time_factor(
 ) -> f64 {
     // The Boil Time factor accounts for the change in utilization due to boil time
     let e = ::std::f64::consts::E;
-    ((1.0 - e.powf(-0.04 * boil_time as f64)) / 4.15)
+    ((1.0 - e.powf(CURVE_SHAPE * boil_time as f64)) / MAX_UTILIZATION)
 }
-
-
 
 impl Tinseth {
     pub fn calculate_ibu(
